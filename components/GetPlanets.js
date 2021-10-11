@@ -3,6 +3,7 @@ import { Text, View, FlatList, Button } from 'react-native';
 import { useQuery, useLazyQuery, gql } from '@apollo/client';
 import { LOAD_PLANETS } from '../GraphQL/Queries';
 import { Accelerometer } from 'expo-sensors';
+const _ = require('lodash');
 
 export default function GetPlanets() {
   const [num, setNum] = useState(0);
@@ -40,7 +41,7 @@ export default function GetPlanets() {
     // update value every 100ms.
     // Adjust this interval to detect
     // faster (20ms) or slower shakes (500ms)
-    Accelerometer.setUpdateInterval(100);
+    Accelerometer.setUpdateInterval(300);
 
     // at each update, we have acceleration registered on 3 axis
     // 1 = no device movement, only acceleration caused by gravity
@@ -62,6 +63,8 @@ export default function GetPlanets() {
 
   // usage :
   const subscription = configureShake((acceleration) => {
+    const randomId = setNum(randomNumber(1, 60));
+    _.debounce(randomId, 3000);
     console.log('shake with acceleration ' + acceleration);
   });
 

@@ -1,13 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  from,
+  HttpLink,
+} from '@apollo/client';
+import GetPlanets from './components/GetPlanets';
+
+const link = from([
+  new HttpLink({
+    uri: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
+  }),
+]);
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: link,
+});
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ApolloProvider client={client}>
+      <View style={styles.container}>
+        <Text>
+          <GetPlanets />
+        </Text>
+      </View>
+    </ApolloProvider>
   );
 }
 

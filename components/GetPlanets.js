@@ -53,7 +53,7 @@ export default function GetPlanets() {
       <View style={styles.contentCard}>
         <Text style={styles.planetTitle}>{planet}</Text>
         <View style={styles.filmsContent}>
-          {films.length > 0 && (
+          {films.length > 0 ? (
             <FlatList
               data={films}
               keyExtractor={(item) => item.id}
@@ -61,6 +61,8 @@ export default function GetPlanets() {
                 <Text style={styles.filmName}>{item.title}</Text>
               )}
             />
+          ) : (
+            <Text style={styles.filmName}>No related films</Text>
           )}
         </View>
       </View>

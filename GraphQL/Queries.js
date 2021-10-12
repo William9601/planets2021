@@ -13,14 +13,3 @@ export const LOAD_PLANETS = gql`
     }
   }
 `;
-
-// query {
-//   planet(planetID: 3) {
-//     name
-//     filmConnection {
-//       films {
-//         title
-//       }
-//     }
-//   }
-// }
